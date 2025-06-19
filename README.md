@@ -1,4 +1,4 @@
-# 🧑‍💻 Reda El Gadida - Portfolio
+# 💻 Reda El Gadida - Portfolio
 
 Welcome to my portfolio repository! This space showcases my hands-on projects in data science and machine learning, with real-world datasets and complete pipelines — from preprocessing to model evaluation.
 
@@ -11,7 +11,7 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 | [Churn Prediction](./churn%20prediction) | Predicting customer churn for telecom using classification models | Python, Pandas, Scikit-Learn, Jupyter |
 | [Loan Default Prediction](./loan%20default%20prediction) | Classifying borrowers likely to default using financial data | Python, Logistic Regression, Feature Engineering |
 | [Credit Card Fraud Detection](./Credit%20Card%20Fraud%20Detection) | Identifying fraudulent transactions on an imbalanced dataset | Python, SMOTE, Scikit-Learn, Matplotlib |
-| [Walmart Sales Forecasting](./walmart%20sales%20forecasting) | Forecasting weekly sales using time series and regression | Python, Pandas, Time Series, XGBoost |
+| [Walmart Sales Forecasting](./walmart%20sales%20forecasting) | Forecasting weekly sales using time series and regression | Python, Pandas, Time Series, XGBoost, Prophet, SARIMA |
 
 > 📌 Each project folder contains code, notebook(s), and a dedicated README with detailed explanations.
 
