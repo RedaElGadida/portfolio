@@ -1,22 +1,22 @@
-# Prédiction du Churn Client pour une Plateforme de Streaming 📺
+# 📺 Customer Churn Prediction for a Streaming Platform
 
-## Résumé du Projet
+## Project Summary
 
-Ce projet analyse le désabonnement (churn) des clients d'une plateforme de streaming. Un modèle de **Random Forest** a été développé pour identifier les abonnés présentant un risque élevé de résiliation, afin de permettre des stratégies de rétention proactives.
+This project analyzes customer churn for a streaming platform. A **Random Forest** model was developed to identify subscribers at high risk of cancellation, enabling proactive retention strategies.
 
-## Principaux Résultats
+## Key Findings
 
-* **Performance du Modèle :** Le modèle a atteint un score **ROC-AUC de 0.74**, démontrant une bonne capacité à prédire le churn.
-* **Facteurs de Risque Clés :** Les caractéristiques les plus importantes pour prédire le churn sont l'**ancienneté du compte (`AccountAge`)**, la **durée moyenne de visionnage (`AverageViewingDuration`)** et les **heures de visionnage par semaine (`ViewingHoursPerWeek`)**.
+* **Model Performance:** The model achieved a **ROC-AUC score of 0.74**, demonstrating a good ability to predict churn.
+* **Key Risk Factors:** The most important features for predicting churn are **Account Age (`AccountAge`)**, **Average Viewing Duration (`AverageViewingDuration`)**, and **Viewing Hours Per Week (`ViewingHoursPerWeek`)**.
 
-## Méthodologie en Bref
+## Brief Methodology
 
-1.  **Préparation des données :** Nettoyage des données, encodage One-Hot des variables catégorielles et standardisation.
-2.  **Modélisation :** Entraînement et optimisation d'un classificateur **Random Forest** avec `GridSearchCV`.
-3.  **Évaluation :** Mesure de la performance du modèle avec la métrique ROC-AUC.
-4.  **Analyse :** Identification des facteurs les plus influents grâce à l'analyse de l'importance des caractéristiques.
+1.  **Data Preparation:** Data cleaning, one-hot encoding of categorical variables, and standardization.
+2.  **Modeling:** Training and optimization of a **Random Forest** classifier with `GridSearchCV`.
+3.  **Evaluation:** Measuring model performance with the ROC-AUC metric.
+4.  **Analysis:** Identifying the most influential factors through feature importance analysis.
 
-## Technologies Utilisées
+## Technologies Used
 
 * Python
 * Pandas
@@ -24,12 +24,12 @@ Ce projet analyse le désabonnement (churn) des clients d'une plateforme de stre
 * Matplotlib / Seaborn
 * Jupyter Notebook
 
-## Comment Lancer le Projet
+## How to Run the Project
 
-1.  Clonez ce dépôt.
-2.  Installez les bibliothèques nécessaires :
+1.  Clone this repository.
+2.  Install the necessary libraries:
     ```bash
     pip install pandas numpy scikit-learn matplotlib seaborn jupyter
     ```
-3.  Assurez-vous que `train.csv` et `test.csv` sont dans le dossier.
-4.  Exécutez le notebook `Churn_Analysis.ipynb`.
+3.  Ensure that `train.csv` and `test.csv` are in the folder.
+4.  Run the `Churn_Analysis.ipynb` notebook.
