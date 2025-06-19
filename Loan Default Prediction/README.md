@@ -1,22 +1,22 @@
-# Modèle de Prédiction de Défaut de Paiement 🏦
+# 🏦 Loan Default Prediction Model
 
-## Résumé du Projet
+## Project Summary
 
-Ce projet vise à prédire la probabilité qu'un emprunteur ne rembourse pas son prêt. Un modèle de **Gradient Boosting** a été entraîné pour analyser les informations des emprunteurs et évaluer le risque de défaut, aidant ainsi les institutions financières à minimiser leurs pertes.
+This project aims to predict the probability that a borrower will default on their loan. A **Gradient Boosting** model was trained to analyze borrower information and assess default risk, helping financial institutions minimize their losses.
 
-## Principaux Résultats
+## Key Findings
 
-* **Performance du Modèle :** Le modèle a atteint un score **ROC-AUC de 0.758**, montrant une bonne capacité à identifier les prêts à risque.
-* **Facteurs de Risque Clés :** Les caractéristiques les plus importantes pour prédire un défaut de paiement sont le **score de crédit (`CreditScore`)**, le **revenu (`Income`)** et le **montant du prêt (`LoanAmount`)**.
+* **Model Performance:** The model achieved a **ROC-AUC score of 0.758**, showing a good ability to identify at-risk loans.
+* **Key Risk Factors:** The most important features for predicting a loan default are the **Credit Score (`CreditScore`)**, **Income (`Income`)**, and the **Loan Amount (`LoanAmount`)**.
 
-## Méthodologie en Bref
+## Brief Methodology
 
-1.  **Préparation des données :** Nettoyage des données et transformation des variables catégorielles (One-Hot Encoding).
-2.  **Modélisation :** Entraînement et comparaison de plusieurs algorithmes (Random Forest, XGBoost, Gradient Boosting).
-3.  **Évaluation :** Le Gradient Boosting a été sélectionné pour sa performance supérieure.
-4.  **Analyse :** Identification des facteurs les plus influents grâce à l'analyse de l'importance des caractéristiques.
+1.  **Data Preparation:** Data cleaning and transformation of categorical variables (One-Hot Encoding).
+2.  **Modeling:** Training and comparison of several algorithms (Random Forest, XGBoost, Gradient Boosting).
+3.  **Evaluation:** Gradient Boosting was selected for its superior performance.
+4.  **Analysis:** Identifying the most influential factors through feature importance analysis.
 
-## Technologies Utilisées
+## Technologies Used
 
 * Python
 * Pandas
@@ -25,14 +25,14 @@ Ce projet vise à prédire la probabilité qu'un emprunteur ne rembourse pas son
 * Matplotlib / Seaborn
 * Jupyter Notebook
 
-## Comment Lancer le Projet
+## How to Run the Project
 
-1.  Clonez ce dépôt.
-2.  Installez les bibliothèques nécessaires :
+1.  Clone this repository.
+2.  Install the necessary libraries:
     ```bash
     pip install pandas scikit-learn xgboost matplotlib seaborn jupyter
     ```
-3.  Assurez-vous que `train.csv` et `test.csv` sont dans le dossier.
-4.  Exécutez le notebook `LoanDefaultPrediction.ipynb`.
+3.  Ensure that `train.csv` and `test.csv` are in the folder.
+4.  Run the `LoanDefaultPrediction.ipynb` notebook.
 
 ---
