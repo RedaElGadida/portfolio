@@ -8,10 +8,11 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 
 | Project | Description | Technologies |
 |--------|-------------|---------------|
-| [Churn Prediction](./churn%20prediction) | Predicting customer churn for streaming platform using classification models | Python, Pandas, Scikit-Learn, Jupyter |
+| [Churn Prediction](./churn%20prediction) | Predicting customer churn for a streaming platform using classification models | Python, Pandas, Scikit-Learn, Jupyter |
 | [Loan Default Prediction](./loan%20default%20prediction) | Classifying borrowers likely to default using financial data | Python, Logistic Regression, Feature Engineering |
 | [Credit Card Fraud Detection](./Credit%20Card%20Fraud%20Detection) | Identifying fraudulent transactions on an imbalanced dataset | Python, SMOTE, Scikit-Learn, Matplotlib |
 | [Walmart Sales Forecasting](./walmart%20sales%20forecasting) | Forecasting weekly sales using time series and regression | Python, Pandas, Time Series, XGBoost, Prophet, SARIMA |
+
 
 > 📌 Each project folder contains code, notebook(s), and a dedicated README with detailed explanations.
 
@@ -38,7 +39,11 @@ I believe in learning by building. My portfolio is a reflection of this philosop
 ## 📫 Connect with Me
 
 - GitHub: [github.com/RedaElGadida](https://github.com/RedaElGadida)
+<<<<<<< HEAD
 - LinkedIn: [linkedin.com/in/reda-el-gadida/](https://www.linkedin.com/in/reda-el-gadida/)
+=======
+- LinkedIn: [https://www.linkedin.com/in/reda-el-gadida/](https://www.linkedin.com/in/reda-el-gadida/)
+>>>>>>> 1bf135c (Update README before syncing)
 
 ---
 
