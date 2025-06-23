@@ -39,11 +39,7 @@ I believe in learning by building. My portfolio is a reflection of this philosop
 ## 📫 Connect with Me
 
 - GitHub: [github.com/RedaElGadida](https://github.com/RedaElGadida)
-<<<<<<< HEAD
-- LinkedIn: [linkedin.com/in/reda-el-gadida/](https://www.linkedin.com/in/reda-el-gadida/)
-=======
-- LinkedIn: [https://www.linkedin.com/in/reda-el-gadida/](https://www.linkedin.com/in/reda-el-gadida/)
->>>>>>> 1bf135c (Update README before syncing)
+- LinkedIn: [linkedin.com/in/reda-el-gadida](https://www.linkedin.com/in/reda-el-gadida/)
 
 ---
 
