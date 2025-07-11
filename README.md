@@ -7,11 +7,12 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 ## 📁 Projects
 
 | Project | Description | Technologies |
-|--------|-------------|---------------|
+|---|---|---|
 | [Churn Prediction](./churn%20prediction) | Predicting customer churn for a streaming platform using classification models | Python, Pandas, Scikit-Learn, Jupyter |
 | [Loan Default Prediction](./loan%20default%20prediction) | Classifying borrowers likely to default using financial data | Python, Logistic Regression, Feature Engineering |
 | [Credit Card Fraud Detection](./Credit%20Card%20Fraud%20Detection) | Identifying fraudulent transactions on an imbalanced dataset | Python, SMOTE, Scikit-Learn, Matplotlib |
 | [Walmart Sales Forecasting](./walmart%20sales%20forecasting) | Forecasting weekly sales using time series and regression | Python, Pandas, Time Series, XGBoost, Prophet, SARIMA |
+| [Movie Recommendation System](./Movie%20Recommendation%20System) | Building a hybrid recommender using collaborative & content-based filtering | Python, Pandas, Scikit-Learn, Surprise |
 
 
 > 📌 Each project folder contains code, notebook(s), and a dedicated README with detailed explanations.
