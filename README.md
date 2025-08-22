@@ -1,6 +1,6 @@
 # 💻 Reda El Gadida - Portfolio
 
-Welcome to my portfolio repository! This space showcases my hands-on projects in data science and machine learning, with real-world datasets and complete pipelines — from preprocessing to model evaluation.
+Welcome to my portfolio repository! This space showcases my hands-on projects in data science and machine learning, with real-world datasets and complete pipelines from preprocessing to model evaluation.
 
 ---
 
