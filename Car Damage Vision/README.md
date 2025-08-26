@@ -43,12 +43,13 @@ The trained AutoML model demonstrated a solid ability to classify the severity o
 **Confusion Matrix:**
 The model performed best on `minor` damage but showed some confusion between `moderate` and `severe` cases.
 
-![Confusion Matrix](Confusion%20matrix%20car%20damage%20project.png)
+![Confusion Matrix](images/Confusion%20matrix%20car%20damage%20project.png)
 
 **Precision & Recall:**
 The model achieved an overall **Average Precision of 58.3%** and a **Precision of 55.8%**.
 
-![Precision and Recall Curve](precision%20and%20recall%20curve%20car%20damage%20project.png)
+![Precision and Recall Curve](images/precision%20and%20recall%20curve%20car%20dama%20project.png)
+
 
 **Prediction Example:**
 The deployed model correctly identified a test image from the `02-moderate` class with **89.9% confidence**.
