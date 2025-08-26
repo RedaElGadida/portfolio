@@ -48,7 +48,7 @@ The model performed best on `minor` damage but showed some confusion between `mo
 **Precision & Recall:**
 The model achieved an overall **Average Precision of 58.3%** and a **Precision of 55.8%**.
 
-![Precision and Recall Curve](images/precision%20and%20recall%20curve%20car%20dama%20project.png)
+![Precision and Recall Curve](images/precision%20and%20recall%20curve%20car%20damage%20project.png)
 
 
 **Prediction Example:**
