@@ -29,25 +29,25 @@ The final delivery included the synthetic vibration dataset and a series of deta
 This graph provides a high-level overview of the entire simulated event, showing the motor's vibration as it moves from a healthy state, through a failure, and back to a normal state.
 
 **Full Cycle Acceleration Graph**
-![Full Cycle Acceleration Graph](full_cycle_acceleration.png)
+![Full Cycle Acceleration Graph](full_cycle_acceleration.jpg)
 
 #### 2. Vibration Velocity (RMS) Analysis
 This graph shows the intensity (RMS) of the vibration. The red dotted line represents the "Alarm Threshold," clearly showing the point where the motor's condition becomes critical.
 
 **RMS Velocity with Alarm Threshold**
-![RMS Velocity with Alarm Threshold](rms_velocity_alarm_threshold.png)
+![RMS Velocity with Alarm Threshold](rms_velocity_alarm_threshold.jpg)
 
 #### 3. FFT Spectrum Analysis
 This graph provides a deeper analysis by showing the specific frequencies of the vibration. The plot clearly shows the emergence of new "fault frequencies" during the failure event.
 
 **FFT Spectrum Analysis**
-![FFT Spectrum Analysis](fft_spectrum_analysis.png)
+![FFT Spectrum Analysis](fft_spectrum_analysis.jpg)
 
 #### 4. Separate Phase Analysis
 This final graph was created to address a specific client request to view the failure phase separately for a more granular analysis.
 
 **Failure Phase Acceleration**
-![Failure phase acceleration](failure_phase_acceleration.png)
+![Failure phase acceleration](failure_phase_acceleration.jpg)
 
 ---
 ## Technologies Used
