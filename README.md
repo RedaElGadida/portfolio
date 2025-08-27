@@ -8,12 +8,14 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 
 | Project | Description | Technologies |
 |---|---|---|
+| [Car Damage Vision](./Car%20Damage%20Vision) | Classified car damage severity using **Cloud ML and Image Classification**. | Python, Pandas, **GCP**, **Vertex AI**, **AutoML** |
+| [Motor Vibration Analysis](./Motor%20Vibration%20Analysis) | Generated synthetic time-series data to simulate motor failure for predictive maintenance. | Python, Pandas, NumPy, SciPy, Matplotlib |
 | [Churn Prediction](./churn%20prediction) | Predicting customer churn for a streaming platform using classification models | Python, Pandas, Scikit-Learn, Jupyter |
 | [Loan Default Prediction](./loan%20default%20prediction) | Classifying borrowers likely to default using financial data | Python, Logistic Regression, Feature Engineering |
 | [Credit Card Fraud Detection](./Credit%20Card%20Fraud%20Detection) | Identifying fraudulent transactions on an imbalanced dataset | Python, SMOTE, Scikit-Learn, Matplotlib |
 | [Walmart Sales Forecasting](./walmart%20sales%20forecasting) | Forecasting weekly sales using time series and regression | Python, Pandas, Time Series, XGBoost, Prophet, SARIMA |
 | [Movie Recommendation System](./Movie%20Recommendation%20System) | Building a hybrid recommender using collaborative & content-based filtering | Python, Pandas, Scikit-Learn, Surprise |
-| [Car Damage Vision](./Car%20Damage%20Vision) | Classified car damage severity using **Cloud ML and Image Classification**. | Python, Pandas, **GCP**, **Vertex AI**, **AutoML** |
+
 
 > 📌 Each project folder contains code, notebook(s), and a dedicated README with detailed explanations.
 
@@ -23,7 +25,7 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 
 - **Languages**: Python, SQL
 - **Cloud Platforms**: Google Cloud Platform (GCP), AWS (basic)
-- **ML Libraries**: Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn, XGBoost, Vertex AI SDK
+- **ML Libraries**: Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn, SciPy, XGBoost, Vertex AI SDK
 - **ML Workflow**: EDA, Data Cleaning, Feature Engineering, Modeling, Evaluation, Deployment
 - **Databases**: MySQL, SQLite
 - **Dev Tools**: Git, GitHub, VSCode, Jupyter Notebook
