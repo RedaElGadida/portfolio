@@ -1,0 +1,273 @@
+import streamlit as st
+import pandas as pd
+
+# === bring in the helpers you validated in Jupyter ===
+# EITHER paste their definitions here,
+# OR import from a module you save (e.g., from prep import prepare_from_excel, get_items_view, get_customers_view)
+from notebook_exports import (
+    prepare_from_excel, get_items_view, get_customers_view,
+    list_item_groups, list_customer_groups,
+    series_history, series_next_forecast,
+    accuracy_snapshot,
+    get_itemcodes_allocated_view,  
+)
+
+
+
+
+REQUIRED_BASE_COLS = [
+    "Delivery Date", "Month", "Quantity", "Itemcode", "Group", "Customer Group"
+]
+
+@st.cache_data(show_spinner=True, ttl=300)
+def _cached_prepare_from_excel(file_obj):
+    # Streamlit gives a file-like object; pandas can read it directly
+    return prepare_from_excel(file_obj)
+
+
+st.set_page_config(page_title="Demand Forecasting Portal", layout="wide")
+st.title("Demand Forecasting Portal")
+st.caption("Monthly forecasts by product or customer from a single Excel file")
+
+with st.expander("About this app", expanded=False):
+    st.markdown("""
+**What this shows**
+- **Product Demand — Item Groups (recommended):** total monthly quantity per item group across all customers.
+- **Customer Demand — Customer Groups:** total monthly quantity per customer group across all items.
+
+**Models**
+- **Baseline:** Seasonal naïve (same month last year).
+- **ML:** Holt–Winters when it beats baseline (1-step ahead); otherwise falls back to baseline.
+- **ML (calibrated):** ML scaled so the **next-month total** matches the baseline total (distribution keeps ML’s shape).
+
+**Accuracy guidance (WAPE)**
+- **Items (Item Groups):** 15–20% typical.
+- **Customers (Customer Groups):** 18–25% typical.
+
+**Data handling**
+- Uses a **single Excel file** for all views.
+- Rows with **S&OP months** like `P-10`, `P-11`, … are **ignored** in modeling (kept only for comparison if needed).
+- Latest actual month and next forecast month are **auto-detected** from the data you upload.
+""")
+
+
+# --- Sidebar ---
+st.sidebar.header("Configuration")
+
+excel_file = st.sidebar.file_uploader("Upload Excel file", type=["xlsx"])
+view = st.sidebar.radio(
+    "Choose a view",
+    ["Product Demand — Item Groups (Recommended)", "Customer Demand — Customer Groups"],
+    index=0
+)
+mode = st.sidebar.radio(
+    "Forecast mode",
+    ["baseline", "ml", "ml_calibrated"],
+    index=0,
+    help="ML uses Holt-Winters where it beats baseline; calibrated scales ML totals to baseline."
+)
+
+# how many months to look back for item mix when allocating group → itemcodes
+ALLOC_LOOKBACK_MONTHS = 3
+
+# show level choice only for the Product Demand page
+level = None
+if view.startswith("Product Demand"):
+    level = st.sidebar.radio(
+        "Product level",
+        ["Groups", "Itemcodes (allocated)"],
+        index=0,
+        help="Groups = product families (most accurate). Itemcodes (allocated) = split by recent mix shares."
+    )
+
+
+if st.sidebar.button("Clear cache"):
+    st.cache_data.clear()
+    st.success("Cache cleared. Re-upload the Excel file.")
+
+if excel_file is None:
+    st.info("Upload the Excel file to see forecasts.")
+    st.stop()
+
+# --- Prepare data (single call) ---
+try:
+    prep = _cached_prepare_from_excel(excel_file)
+except Exception as e:
+    st.error(
+        "We couldn’t read this workbook. Please ensure it contains a sheet named "
+        "`Base` with these columns: "
+        "`Delivery Date`, `Month`, `Quantity`, `Itemcode`, `Group`, `Customer Group`."
+    )
+    with st.expander("Technical details"):
+        st.exception(e)
+    st.stop()
+
+base_cols = set(prep["base_actuals"].columns)
+missing = [c for c in REQUIRED_BASE_COLS if c not in base_cols]
+if missing:
+    st.error("Missing required columns in `Base`: " + ", ".join(missing))
+    st.stop()
+
+exports = prep["exports"]
+latest = exports["latest_actual_month"]
+next_m = exports["next_forecast_month"]
+
+# --- Route to the right view getter ---
+if view.startswith("Product Demand"):
+    if level == "Itemcodes (allocated)":
+        v_alloc = get_itemcodes_allocated_view(
+            mode, exports, lookback_months=ALLOC_LOOKBACK_MONTHS
+        )
+    else:
+        v = get_items_view(mode, exports)
+else:
+    v = get_customers_view(mode, exports)
+
+
+# --- Header stats ---
+lcol, rcol = st.columns([1,1])
+with lcol:
+    st.metric("Latest actual month", latest)
+with rcol:
+    st.metric("Next forecast month", next_m)
+
+# --- Accuracy snapshot (last 3 months on training) ---
+snap_view = "items" if view.startswith("Product Demand") else "customers"
+snap = accuracy_snapshot(exports, view=snap_view, top_k_customers=30)
+
+with st.expander("Accuracy snapshot (last 3 months, training data)", expanded=False):
+    c1, c2, c3 = st.columns([1,1,1])
+    c1.metric("Series evaluated", f"{snap['n_series']}")
+    c2.metric("Baseline WAPE", f"{snap['baseline_wape_pct']}%")
+    c3.metric("ML WAPE", f"{snap['ml_wape_pct']}%")
+    st.caption(f"Months: {', '.join(snap['months'])} • View: {snap_view}")
+
+
+# Header works for both levels
+if view.startswith("Product Demand") and level == "Itemcodes (allocated)":
+    page_title = f"Product Demand — Itemcodes (allocated) | latest/next: {exports['latest_actual_month']} → {exports['next_forecast_month']}"
+else:
+    page_title = v["title"]
+st.subheader(page_title)
+
+
+# --- Next-month forecast (table) ---
+if view.startswith("Product Demand") and level == "Itemcodes (allocated)":
+    st.markdown("**Next-month forecast (Itemcodes — allocated)**")
+
+    next_tbl = v_alloc["next_forecast_long"].copy()
+    st.dataframe(next_tbl, use_container_width=True)
+
+    total = float(next_tbl["Forecast_qty"].sum())
+    st.markdown(f"**Total forecasted quantity (next month):** {total:,.0f}")
+    st.caption(
+        f"Mode: {v_alloc.get('source_used','baseline')}+allocated • "
+        f"Rows: {len(next_tbl)} • Total: {total:,.0f} • "
+        f"Lookback: {ALLOC_LOOKBACK_MONTHS}m shares"
+    )
+
+    # CSV download for per-Itemcode
+    csv = next_tbl.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        "Download per-Itemcode forecast (CSV)",
+        data=csv,
+        file_name=f"forecast_itemcodes_{v_alloc['next_month']}_{mode}.csv",
+        mime="text/csv",
+        use_container_width=True,
+    )
+
+    # Optional: show the allocation shares used
+    with st.expander("Show allocation shares (by Group → Itemcode)", expanded=False):
+        st.dataframe(v_alloc["shares_table"], use_container_width=True)
+        st.caption("Share basis: 3m / 12m / lifetime / equal")
+
+    st.stop()  # hide group-only sections below when viewing Itemcodes (allocated)
+
+else:
+    # Existing rendering for Groups or Customers
+    st.markdown("**Next-month forecast table**")
+    next_tbl = v["next_forecast_long"].copy()
+    st.dataframe(next_tbl, use_container_width=True)
+    total = float(next_tbl["Forecast_qty"].sum())
+    st.markdown(f"**Total forecasted quantity (next month):** {total:,.0f}")
+    st.caption(f"Mode: {v.get('source_used','baseline')} • Rows: {len(next_tbl)} • Total: {total:,.0f}")
+
+    # (keep your existing CSV download here if you already had one)
+
+
+# --- Training history (wide) ---
+st.markdown("---")
+st.markdown("**Training history (monthly totals)**")
+train_tbl = v["train_wide"].copy()
+st.dataframe(train_tbl, use_container_width=True)
+
+st.caption(f"History coverage: {train_tbl.shape[0]} months × {train_tbl.shape[1]} series")
+
+
+# --- Drill-down: select a single series and plot its history ---
+st.markdown("---")
+st.markdown("**Drill-down: time series**")
+
+if view.startswith("Product Demand"):
+    names = list_item_groups(exports)
+    label = "Item Group"
+    chosen = st.selectbox(f"Select {label}", names, index=(names.index("Group 3") if "Group 3" in names else 0))
+    hist_df = series_history(exports, view="items", name=chosen)
+    next_val = series_next_forecast(exports, view="items", name=chosen, source=v.get("source_used", "baseline"))
+else:
+    names = list_customer_groups(exports)
+    label = "Customer Group"
+    chosen = st.selectbox(f"Select {label}", names, index=0)
+    hist_df = series_history(exports, view="customers", name=chosen)
+    next_val = series_next_forecast(exports, view="customers", name=chosen, source=v.get("source_used", "baseline"))
+
+# Convert Month_ym -> datetime index for plotting
+hist_plot = hist_df.copy()
+hist_plot["date"] = pd.PeriodIndex(hist_plot["Month_ym"], freq="M").to_timestamp()
+hist_plot = hist_plot.set_index("date")[["Quantity"]]
+
+st.line_chart(hist_plot, use_container_width=True)
+st.metric(f"Next forecast for {chosen}", f"{next_val:,.0f}", help=f"Mode: {v.get('source_used', 'baseline')}")
+
+
+# --- (Optional) per-series selection table for ML vs baseline (Items/Customers) ---
+if v.get("selection") is not None and mode != "baseline":
+    st.markdown("---")
+    st.markdown("**Model selection (per series)**")
+    st.dataframe(v["selection"], use_container_width=True)
+
+# --- CSV export buttons ---
+st.markdown("---")
+st.markdown("**Export**")
+
+# Which view are we on?
+view_slug = "items" if view.startswith("Product Demand") else "customers"
+
+# Current next-month table (what the user sees)
+next_tbl = v["next_forecast_long"].copy()
+
+# Build filenames
+fname_forecast = f"forecast_{view_slug}_{v.get('source_used','baseline')}_{next_m}.csv"
+fname_selection = f"model_selection_{view_slug}_{v.get('source_used','baseline')}_{next_m}.csv"
+
+c1, c2 = st.columns(2)
+
+with c1:
+    st.download_button(
+        label="Download next-month forecast (CSV)",
+        data=next_tbl.to_csv(index=False).encode("utf-8"),
+        file_name=fname_forecast,
+        mime="text/csv"
+    )
+
+with c2:
+    sel = v.get("selection")
+    if sel is not None and v.get("source_used") != "baseline":
+        st.download_button(
+            label="Download per-series model selection (CSV)",
+            data=sel.to_csv(index=False).encode("utf-8"),
+            file_name=fname_selection,
+            mime="text/csv"
+        )
+    else:
+        st.caption("Per-series selection is available in ML modes.")

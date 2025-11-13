@@ -1,0 +1,24 @@
+name: Keep Streamlit App Awake
+
+on:
+  schedule:
+    # Runs every 6 hours (adjust the '6' if you prefer a different interval, e.g., '4')
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the Streamlit App
+        run: |
+          # YOUR CORRECTED URL IS BELOW
+          STREAMLIT_URL="https://forecasting-app-mvp-gwpcvtk4xnbltoaewr7nqx.streamlit.app/" 
+          
+          echo "Attempting to ping the Streamlit app at $STREAMLIT_URL"
+          
+          # Send a request and check for a successful status code (200 or 302).
+          # This ensures the job exits with a success status if the app is alive.
+          curl -s -o /dev/null -w "%{http_code}" $STREAMLIT_URL | grep -E '^(200|302)$'
+
+          echo "Streamlit app pinged successfully (Check exit code for success)."
