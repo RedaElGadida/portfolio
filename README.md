@@ -8,6 +8,7 @@ Welcome to my portfolio repository! This space showcases my hands-on projects in
 
 | Project | Description | Technologies |
 |---|---|---|
+| [Forcasting Portal MVP](./Forcasting%20Portal%20MVP) | End-to-end forecasting system with baseline + Holt-Winters ML, calibration, and a Streamlit web app for product/customer demand. | Python, Pandas, Statsmodels, Streamlit |
 | [Car Damage Vision](./Car%20Damage%20Vision) | Classified car damage severity using **Cloud ML and Image Classification**. | Python, Pandas, **GCP**, **Vertex AI**, **AutoML** |
 | [Motor Vibration Analysis](./Motor%20Vibration%20Analysis) | Generated synthetic time-series data to simulate motor failure for predictive maintenance. | Python, Pandas, NumPy, SciPy, Matplotlib |
 | [Churn Prediction](./churn%20prediction) | Predicting customer churn for a streaming platform using classification models | Python, Pandas, Scikit-Learn, Jupyter |
