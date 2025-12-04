@@ -5,7 +5,7 @@ This project is an end-to-end forecasting pipeline designed for real business op
 
 It transforms raw Excel inputs into clean, structured data, builds multiple forecast models (Baseline + Holt-Winters ML), calibrates the results, and exposes everything through a professional **Streamlit web application**.
 
-This README explains the full logic behind the project — without requiring any dataset.
+This README explains the full logic behind the project without requiring any dataset.
 
 ---
 
@@ -35,13 +35,13 @@ This table forms the foundation for all forecasting models.
 
 ## Forecasting Models
 
-### **Baseline Model — Seasonal Naïve (12 months)**
+### **Baseline Model - Seasonal Naïve (12 months)**
 - Uses last year's same month value  
 - Extremely stable for aggregated product demand  
 - Serves as fallback if ML does not improve accuracy  
 
-### **Holt–Winters ML Model**
-The system trains an additive Holt–Winters model for each series:
+### **Holt-Winters ML Model**
+The system trains an additive Holt-Winters model for each series:
 
 - Additive trend  
 - Additive seasonality  
@@ -60,7 +60,7 @@ This ensures the model chosen for each group is the **best performing one**, not
 
 ---
 
-## 🎯 Calibration Layer (Business-Focused)
+## Calibration Layer (Business-Focused)
 
 ML forecasts are **calibrated** to ensure the next-month totals remain consistent with the baseline forecast.
 
@@ -73,7 +73,7 @@ Total calibration is crucial for real-world use, especially in supply chain envi
 
 ---
 
-## 🔽 Itemcode Allocation Engine
+## Itemcode Allocation Engine
 
 Once Group-level forecasts are ready, they are allocated down to Itemcode level using a hierarchical top-down model.
 
@@ -91,7 +91,7 @@ This ensures:
 
 ---
 
-## 🖥️ Streamlit App (User Interface)
+## Streamlit App (User Interface)
 
 The Streamlit interface provides an accessible way to explore the forecast results:
 
@@ -109,7 +109,7 @@ The interface is designed for non-technical users while leveraging a complex for
 
 ---
 
-## 📐 Accuracy Expectations
+## Accuracy Expectations
 
 Based on evaluation and typical market stability:
 
@@ -122,7 +122,7 @@ These ranges were consistently achieved during development.
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Python** (Pandas, NumPy)  
 - **Statsmodels** (Holt–Winters Exponential Smoothing)  
