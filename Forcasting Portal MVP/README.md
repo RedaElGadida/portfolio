@@ -1,4 +1,4 @@
-# 📊 Demand Forecasting Portal  
+# Demand Forecasting Portal  
 **Multi-model time-series forecasting system with calibration & Streamlit UI**
 
 This project is an end-to-end forecasting pipeline designed for real business operations such as demand planning, inventory management, customer budgeting, and production forecasting.
@@ -9,7 +9,7 @@ This README explains the full logic behind the project — without requiring any
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 The solution was built for use in a production environment where data quality varies and accuracy matters.  
 The system includes:
@@ -33,7 +33,7 @@ This table forms the foundation for all forecasting models.
 
 ---
 
-## 📈 Forecasting Models
+## Forecasting Models
 
 ### **Baseline Model — Seasonal Naïve (12 months)**
 - Uses last year's same month value  
